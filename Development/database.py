@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS activities (
 create_users_table = """
 CREATE TABLE IF NOT EXISTS users (
     user_id INTEGER PRIMARY KEY,
+    user_email TEXT NOT NULL,
     username TEXT NOT NULL,
     password TEXT NOT NULL
 );
