@@ -4,16 +4,35 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dopamine Menu</title>
-        <!-- Add Google Font for bubbly font -->
-        <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
         <h1>Dopamine Menu</h1>
-        <p>Please login.</p>
-        <button onclick="window.location.href='{{url_for('menupage')}}'">Login</button>
 
-        <!-- Strawberry Image (can be swapped with your own) -->
-        <div class="strawberry"></div>
+        <!-- Login Section -->
+        <div class="login-container">
+            <h2>Login</h2>
+            <input type="text" placeholder="Username" id="username">
+            <input type="password" placeholder="Password" id="password">
+            <button onclick="window.location.href='{{url_for('menupage')}}';">Login</button>
+            <p class="register-link">Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+
+        <!-- <script>
+            // Login function (You can replace this with actual authentication logic later)
+            function login() {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                // Simple alert to simulate login action
+                if (username && password) {
+                    alert('Login successful! Redirecting to menu...');
+                    window.location.href = 'menupage.html';  // Redirect to the menu page
+                } else {
+                    alert('Please enter both username and password!');
+                }
+            }
+        </script> -->
     </body>
 </html>

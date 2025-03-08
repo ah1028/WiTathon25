@@ -1,58 +1,212 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #ffeff7;
+    font-family: 'Fredoka One', cursive;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-image: 
-        linear-gradient(45deg, #ffccd5 25%, transparent 25%, transparent 75%, #ffccd5 75%, #ffccd5),
-        linear-gradient(45deg, #ffccd5 25%, white 25%, white 75%, #ffccd5 75%, #ffccd5);
-    background-size: 50px 50px; /* Gingham pattern */
+    height: 100%;
+    min-height: 100vh;
+    background-image: url('https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/background.png');
+    background-size: cover;
+    background-position: center;
+    overflow-y: scroll;
 }
 
 h1 {
-    font-family: 'Bubblegum Sans', cursive;
-    font-size: 60px;  /* Make the main text larger */
+    font-family: 'Fredoka One', cursive;
+    font-size: 100px;
     text-transform: uppercase;
     font-weight: bold;
-    color: #ff6699;
-    margin-bottom: 20px;
+    color: #ff668a;
+    margin-top: 20px;
+    margin-bottom: 0;
     letter-spacing: 5px;
 }
 
-p {
-    font-size: 22px;
-    color: #ff3366;
-    margin-bottom: 30px;
+.login-container {
+    background-color: white;
+    padding: 40px;
+    margin-top: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-button {
-    padding: 15px 30px;
-    font-size: 22px;
-    font-weight: bold;
+.login-container input {
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.login-container button {
+    padding: 10px 20px; /* Made button smaller */
     background-color: #ff5c8d;
     color: white;
     border: none;
     cursor: pointer;
-    border-radius: 12px;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
     transition: 0.3s;
+    margin-top: 20px;
+    font-size: 24px; /* Font size adjusted to be smaller */
+    font-family: 'Fredoka One', cursive; /* Button font set to Fredoka One */
 }
 
-button:hover {
+.login-container button:hover {
     background-color: #ff3385;
     transform: scale(1.05);
 }
 
-/* Add a cute strawberry image */
-.strawberry {
-    width: 50px;
-    height: 50px;
-    background-image: url('https://example.com/your-strawberry-image.png'); /* Change this URL to your custom strawberry image */
-    background-size: cover;
+.register-link {
     margin-top: 20px;
+    font-size: 18px;
+    color: #ff668a;
+}
+
+.register-link a {
+    text-decoration: none;
+    color: #ff668a;
+    font-weight: bold;
+}
+
+.login-container h2 {
+    font-size: 40px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Filter Box */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 30px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.filter-container div {
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+}
+
+.filter-container label {
+    font-size: 18px;
+    margin-right: 10px; /* Adjust space between label and dropdown */
+}
+
+.filter-container select {
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Items container */
+.items-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1240px;
+    background-color: white;
+    padding: 30px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-height: 400vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 24px;
+    color: #ff3d6a;
+    border: 2px dotted #ffb6c1;
+    padding: 15px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    transition: 0.3s;
+    position: relative;
+}
+
+.item:hover {
+    transform: scale(1.05);
+}
+
+.item img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.scratch-off-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+/* Canvas overlay for scratch-off effect */
+.scratch-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+/* Scratching state */
+.scratched {
+    background-color: transparent;
+}
+
+.item span {
+    margin-bottom: 10px;
+}
+
+.item button {
+    padding: 10px 20px;
+    background-color: #ff5c8d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+    margin-top: 10px;
+    opacity: 0.5;
+    pointer-events: none; /* Initially disable button */
+}
+
+.item button.enabled {
+    opacity: 1;
+    pointer-events: all; /* Enable button when scratched above 60% */
+}
+
+.item button:hover {
+    background-color: #ff3385;
+    transform: scale(1.05);
 }
