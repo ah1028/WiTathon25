@@ -1,62 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dopamine Menu</title>
-         <!-- Add Google Font for bubbly font -->
-         <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-         <style>
-             body {
-                 font-family: Arial, sans-serif;
-                background-color: #ffeff7;  /* Plain light pink background */
-                margin: 0;
-                padding: 0;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: 100vh;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dopamine Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Fredoka One', cursive;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            min-height: 100vh;
+            background-image: url('https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/background.png');
+            background-size: cover;
+            background-position: center;
+            overflow-y: scroll;
+        }
 
-            h1 {
-                font-family: 'Fredoka One', cursive;
-                font-size: 100px;  /* Make the main text much larger */
-                text-transform: uppercase;
-                font-weight: bold;
-                color: #ff6699;
-                margin-bottom: 30px;
-                letter-spacing: 8px;
-            }
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 100px;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #ff668a;
+            margin-top: 20px;
+            margin-bottom: 0;
+            letter-spacing: 5px;
+        }
 
-            p {
-                font-size: 32px;  /* Make the text larger */
-                color: #ff3366;
-                margin-bottom: 50px;
-            }
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-            button {
-                padding: 25px 50px;  /* Increase button size */
-                font-size: 30px;  /* Increase font size */
-                font-weight: bold;
-                background-color: #ff5c8d;
-                color: white;
-                border: none;
-                cursor: pointer;
-                border-radius: 12px;
-                box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-                transition: 0.3s;
-            }
+        .login-container input {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
 
-            button:hover {
-                background-color: #ff3385;
-                transform: scale(1.1);  /* Slightly larger button on hover */
+        .login-container button {
+            padding: 10px 20px; /* Made button smaller */
+            background-color: #ff5c8d;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+            margin-top: 20px;
+            font-size: 24px; /* Font size adjusted to be smaller */
+            font-family: 'Fredoka One', cursive; /* Button font set to Fredoka One */
+        }
+
+        .login-container button:hover {
+            background-color: #ff3385;
+            transform: scale(1.05);
+        }
+
+        .register-link {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #ff668a;
+        }
+
+        .register-link a {
+            text-decoration: none;
+            color: #ff668a;
+            font-weight: bold;
+        }
+
+        .login-container h2 {
+            font-size: 40px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Dopamine Menu</h1>
+
+    <!-- Login Section -->
+    <div class="login-container">
+        <h2>Login</h2>
+        <input type="text" placeholder="Username" id="username">
+        <input type="password" placeholder="Password" id="password">
+        <button onclick="window.location.href='menupage.html';">Login</button>
+        <p class="register-link">Don't have an account? <a href="register.html">Register here</a></p>
+    </div>
+
+    <!-- <script>
+        // Login function (You can replace this with actual authentication logic later)
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple alert to simulate login action
+            if (username && password) {
+                alert('Login successful! Redirecting to menu...');
+                window.location.href = 'menupage.html';  // Redirect to the menu page
+            } else {
+                alert('Please enter both username and password!');
             }
-        </style>
-    </head>
-    <body>
-        <h1>Dopamine Menu</h1>
-        <p>Please login below</p>
-        <button onclick="window.location.href='menupage.html'">Login</button>
-    </body>
+        }
+    </script> -->
+
+</body>
 </html>
