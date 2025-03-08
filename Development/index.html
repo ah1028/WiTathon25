@@ -4,12 +4,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dopamine Menu</title>
-        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+        <!-- Add Google Font for bubbly font -->
+        <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
         <style>
             body {
-                text-align: center;
                 font-family: Arial, sans-serif;
-                background-color: #ffe6f2;
+                background-color: #ffeff7;
                 margin: 0;
                 padding: 0;
                 display: flex;
@@ -17,40 +17,53 @@
                 align-items: center;
                 justify-content: center;
                 height: 100vh;
-                background-image: linear-gradient(45deg, #ffb6c1 25%, transparent 25%, transparent 75%, #ffb6c1 75%, #ffb6c1),
-                                  linear-gradient(45deg, #ffb6c1 25%, white 25%, white 75%, #ffb6c1 75%, #ffb6c1);
-                background-size: 50px 50px;
+                background-image: 
+                    linear-gradient(45deg, #ffccd5 25%, transparent 25%, transparent 75%, #ffccd5 75%, #ffccd5),
+                    linear-gradient(45deg, #ffccd5 25%, white 25%, white 75%, #ffccd5 75%, #ffccd5);
+                background-size: 50px 50px; /* Gingham pattern */
             }
 
             h1 {
-                font-family: 'Dancing Script', cursive;
-                font-size: 48px;
-                color: #d6336c;
-                margin-bottom: 10px;
+                font-family: 'Bubblegum Sans', cursive;
+                font-size: 60px;  /* Make the main text larger */
+                text-transform: uppercase;
+                font-weight: bold;
+                color: #ff6699;
+                margin-bottom: 20px;
+                letter-spacing: 5px;
             }
 
             p {
-                font-size: 20px;
-                color: #cc3366;
-                margin-bottom: 20px;
+                font-size: 22px;
+                color: #ff3366;
+                margin-bottom: 30px;
             }
 
             button {
-                padding: 12px 24px;
-                font-size: 20px;
+                padding: 15px 30px;
+                font-size: 22px;
                 font-weight: bold;
-                background-color: #ff4d6d;
+                background-color: #ff5c8d;
                 color: white;
                 border: none;
                 cursor: pointer;
-                border-radius: 10px;
-                transition: 0.3s;
+                border-radius: 12px;
                 box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+                transition: 0.3s;
             }
 
             button:hover {
-                background-color: #e63950;
+                background-color: #ff3385;
                 transform: scale(1.05);
+            }
+
+            /* Add a cute strawberry image */
+            .strawberry {
+                width: 50px;
+                height: 50px;
+                background-image: url('https://example.com/your-strawberry-image.png'); /* Change this URL to your custom strawberry image */
+                background-size: cover;
+                margin-top: 20px;
             }
         </style>
     </head>
@@ -58,5 +71,8 @@
         <h1>Dopamine Menu</h1>
         <p>Click the button below to go to the next page.</p>
         <button onclick="window.location.href='menupage.html'">Go to Next Page</button>
+
+        <!-- Strawberry Image (can be swapped with your own) -->
+        <div class="strawberry"></div>
     </body>
 </html>
