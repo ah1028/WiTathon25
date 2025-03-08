@@ -26,7 +26,12 @@ def menupage():
 
 @app.route('/new-activity/')
 def new_activity():
-    # image = request.form['image']
-    # print(image)
+    return render_template('new-activity.html')
 
-    return render_template(url_for('new-activity.html'))
+@app.route('/submit-activity', methods=['POST'])
+def submit_activity():
+    image = request.form['image']
+    print("hi")
+    print(image)
+    if True:
+        return redirect(url_for('menupage'))

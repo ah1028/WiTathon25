@@ -14,7 +14,7 @@
         <h2>Add New Activity</h2>
     <!-- New Activity -->
     <div class="activity-container">
-        <form id="activity-form" method="POST" action="./new-activity"></form>
+        <form id="activity-form" method="POST" action="./submit-activity">
         <!-- Image -->
         <label>Image</label>
         <input type="file" name="image" id="fileInput" accept="image/*"/>
@@ -51,7 +51,7 @@
               <input id="art" name="art" type="checkbox" value="True">Art
               <input id="mindfullness" name="mindfullness" type="checkbox" value="True">Mindfullness
             </div>
-            <!-- <button onclick="window.location.href='{{url_for('menupage')}}';">Submit</button> -->
+            <button onclick="window.location.href='{{url_for('menupage')}}';">Submit</button>
         </form>
     </div>
 
