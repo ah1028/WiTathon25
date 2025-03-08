@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS activities (
     tags TEXT CHECK (LENGTH(tags) <= 20),
     pict_url TEXT,
     expense REAL,
-    when TEXT,
+    blah TEXT,
     duration INTEGER,
     longitude REAL,
     latitude REAL,
@@ -41,10 +41,10 @@ CREATE TABLE IF NOT EXISTS activity_tags (
 );
 """
 create_users_table = """
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     user_id INTEGER PRIMARY KEY,
-    user_email TEXT NOT NULL,
-    username TEXT NOT NULL,
+    user_email TEXT NOT NULL UNIQUE,
+    username TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL
 );
 """

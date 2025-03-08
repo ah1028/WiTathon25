@@ -1,36 +1,52 @@
 import sqlite3
+import bcrypt
 
-# Connect to the database
-conn = sqlite3.connect("database.db")
-cursor = conn.cursor()
 
-# # Execute the query
-# cursor.execute("SELECT * FROM users")
+## HASH PW w/bcrypt ## 
+def hash_password(password):
+    salt = bcrypt.gensalt()  # Generate a salt
+    hashed = bcrypt.hashpw(password.encode(), salt)  # Hash the password
+    return hashed
 
-# # Fetch all rows
-# users = cursor.fetchall()
+## LOGIN ## 
+def login(username_input, password_input):
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
 
-# Print results
 
-users_data = [
-    ("alice@example.com", "AliceWonder", "password123"),
-    ("bob@example.com", "BobBuilder", "securePass"),
-    ("charlie@example.com", "CharlieBrown", "charliePass"),
-    ("diana@example.com", "DianaPrince", "wonderWoman99"),
-    ("eve@example.com", "EveOnline", "evePass456"),
-    ("frank@example.com", "FrankCastle", "punisher001"),
-    ("grace@example.com", "GraceHopper", "codingQueen"),
-    ("harry@example.com", "HarryPotter", "quidditch123"),
-    ("isabel@example.com", "IsabelJones", "isa2025"),
-    ("jack@example.com", "JackSparrow", "blackPearl"),
-]
+    # Fetch the hashed password for the given username
+    cursor.execute("SELECT password FROM users WHERE username = ?", (username_input,))
+    user = cursor.fetchone()
 
-# Execute the insert statements
-for user in users_data:
-    cursor.execute("INSERT INTO users (user_email, username, password) VALUES (?, ?, ?);", user)
+    conn.close()
 
-# Commit changes
-conn.commit()
+    # check user exists
+    if user is None:
+        return False  
 
-# Close the connection
-conn.close()
+    # compare passwords
+    hashed_pw = user[0]
+    return bcrypt.checkpw(password_input.encode(), hashed_pw)
+
+### SIGN UP ### 
+def signup(email_input, username_input, password_input):
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE username = ? OR user_email = ?", (username_input, email_input))
+
+    user = cursor.fetchone()
+
+    if user is None:
+        hashed_pw = hash_password(password_input)
+
+        cursor.execute("INSERT INTO users (user_email, username, password) VALUES (?, ?, ?);", (email_input,username_input,hashed_pw))
+        
+        conn.commit()
+        conn.close()
+        return True
+    
+    conn.close()
+    return False # Username/Email already exists
+
+
+
