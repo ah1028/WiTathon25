@@ -4,10 +4,133 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='menu_style.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
         <title>Dopamine Menu</title>
     </head>
     <body>
-        <h1>Welcome to the Menu</h1>
-        <p>Scroll and filter to see your options.</p>
+        <h1>Dopamine Menu</h1>
+
+    <!-- Filter Box -->
+    <div class="filter-container">
+        <!-- Filter for Radius -->
+        <div>
+            <label for="radius">Radius:</label>
+            <select id="radius">
+                <option value="5">5 km</option>
+                <option value="10">10 km</option>
+                <option value="20">20 km</option>
+            </select>
+        </div>
+
+        <!-- Filter for Time Needed -->
+        <div>
+            <label for="time-needed">Time Needed:</label>
+            <select id="time-needed">
+                <option value="30">30 minutes</option>
+                <option value="60">1 hour</option>
+                <option value="120">2 hours</option>
+            </select>
+        </div>
+
+        <!-- Filter for Number of People -->
+        <div>
+            <label for="people-needed">Number of People:</label>
+            <select id="people-needed">
+                <option value="1">1 person</option>
+                <option value="2">2 people</option>
+                <option value="3">3 people</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- White box container for items -->
+    <div class="items-container" id="items-container">
+        <!-- Example item -->
+        <div class="item">
+            <span>Activity 1</span>
+            <div class="scratch-off-container">
+                <!-- Image under the scratch-off effect -->
+                <img src="https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/background.png" alt="Activity Image" class="activity-image">
+                <!-- Canvas for the scratch-off effect -->
+                <canvas class="scratch-canvas"></canvas>
+            </div>
+            <button class="disabled">Select</button>
+        </div>
+        <!-- More items go here -->
+    </div>
+
+    <script>
+        // Function to initialize the scratch-off effect on each item
+        function initScratchEffect() {
+            const scratchElements = document.querySelectorAll('.scratch-off-container');
+
+            scratchElements.forEach(scratchElement => {
+                const canvas = scratchElement.querySelector('.scratch-canvas');
+                const img = scratchElement.querySelector('.activity-image');
+                const button = scratchElement.closest('.item').querySelector('button');
+                const ctx = canvas.getContext('2d');
+
+                // Set the canvas size to match the image size
+                canvas.width = img.width;
+                canvas.height = img.height;
+
+                // Draw a grey scratch layer
+                ctx.fillStyle = '#ccc';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Make the image visible under the scratch layer (covered by canvas initially)
+                canvas.style.backgroundImage = `url(${img.src})`;
+                canvas.style.backgroundSize = 'cover';
+
+                let scratchedArea = 0;
+                let isScratching = false;
+
+                function startScratching(event) {
+                    isScratching = true;
+                    scratch(event);
+                }
+
+                function stopScratching() {
+                    isScratching = false;
+                }
+
+                function scratch(event) {
+                    if (!isScratching) return;
+
+                    // Get mouse position relative to the canvas
+                    const rect = canvas.getBoundingClientRect();
+                    const x = event.clientX - rect.left;
+                    const y = event.clientY - rect.top;
+
+                    // Clear the circle area where the mouse is
+                    ctx.clearRect(x - 10, y - 10, 20, 20);
+
+                    // Increment scratched area
+                    scratchedArea += 0.1; // each move clears a small area
+
+                    // If 60% or more is scratched off, enable the button
+                    if (scratchedArea >= 15) {
+                        button.classList.add('enabled');
+                    }
+                }
+
+                // Mouse event listeners
+                canvas.addEventListener('mousedown', startScratching);
+                canvas.addEventListener('mousemove', scratch);
+                canvas.addEventListener('mouseup', stopScratching);
+                canvas.addEventListener('mouseleave', stopScratching);
+
+                // Touch event listeners for mobile
+                canvas.addEventListener('touchstart', startScratching);
+                canvas.addEventListener('touchmove', scratch);
+                canvas.addEventListener('touchend', stopScratching);
+                canvas.addEventListener('touchcancel', stopScratching);
+            });
+        }
+
+        // Initialize the scratch-off effect after the page loads
+        window.onload = initScratchEffect;
+    </script>
     </body>
 </html>

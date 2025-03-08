@@ -1,58 +1,25 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #ffeff7;
+    font-family: 'Fredoka One', cursive;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-image: 
-        linear-gradient(45deg, #ffccd5 25%, transparent 25%, transparent 75%, #ffccd5 75%, #ffccd5),
-        linear-gradient(45deg, #ffccd5 25%, white 25%, white 75%, #ffccd5 75%, #ffccd5);
-    background-size: 50px 50px; /* Gingham pattern */
+    height: 100%;
+    min-height: 100vh;
+    background-image: url('https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/background.png');
+    background-size: cover;
+    background-position: center;
+    overflow-y: scroll;
 }
 
 h1 {
-    font-family: 'Bubblegum Sans', cursive;
-    font-size: 60px;  /* Make the main text larger */
+    font-family: 'Fredoka One', cursive;
+    font-size: 100px;
     text-transform: uppercase;
     font-weight: bold;
-    color: #ff6699;
-    margin-bottom: 20px;
-    letter-spacing: 5px;
-}
-
-p {
-    font-size: 22px;
-    color: #ff3366;
-    margin-bottom: 30px;
-}
-
-button {
-    padding: 15px 30px;
-    font-size: 22px;
-    font-weight: bold;
-    background-color: #ff5c8d;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 12px;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-    transition: 0.3s;
-}
-
-button:hover {
-    background-color: #ff3385;
-    transform: scale(1.05);
-}
-
-/* Add a cute strawberry image */
-.strawberry {
-    width: 50px;
-    height: 50px;
-    background-image: url('https://example.com/your-strawberry-image.png'); /* Change this URL to your custom strawberry image */
-    background-size: cover;
+    color: #ff668a;
     margin-top: 20px;
+    margin-bottom: 0;
+    letter-spacing: 5px;
 }

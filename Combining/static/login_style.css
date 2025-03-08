@@ -1,0 +1,56 @@
+.login-container {
+    background-color: white;
+    padding: 40px;
+    margin-top: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-container input {
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.login-container button {
+    padding: 10px 20px; /* Made button smaller */
+    background-color: #ff5c8d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+    margin-top: 20px;
+    font-size: 24px; /* Font size adjusted to be smaller */
+    font-family: 'Fredoka One', cursive; /* Button font set to Fredoka One */
+}
+
+.login-container button:hover {
+    background-color: #ff3385;
+    transform: scale(1.05);
+}
+
+.register-link {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #ff668a;
+}
+
+.register-link a {
+    text-decoration: none;
+    color: #ff668a;
+    font-weight: bold;
+}
+
+.login-container h2 {
+    font-size: 40px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}

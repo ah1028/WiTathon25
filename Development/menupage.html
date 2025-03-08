@@ -1,12 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dopamine Menu</title>
-    </head>
-    <body>
-        <h1>Welcome to the Menu</h1>
-        <p>Scroll and filter to see your options.</p>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dopamine Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Fredoka One', cursive;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            min-height: 100vh;
+            background-image: url('https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/background.png');
+            background-size: cover;
+            background-position: center;
+            overflow-y: scroll;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 100px;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #ff668a;
+            margin-top: 20px;
+            margin-bottom: 0;
+            letter-spacing: 5px;
+        }
+
+        /* Filter Box */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 30px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .filter-container div {
+            display: flex;
+            align-items: center;
+            margin: 0 20px;
+        }
+
+        .filter-container label {
+            font-size: 18px;
+            margin-right: 10px; /* Adjust space between label and dropdown */
+        }
+
+        .filter-container select {
+            width: 200px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        /* Items container */
+        .items-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 1240px;
+            background-color: white;
+            padding: 30px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-height: 400vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font-size: 24px;
+            color: #ff3d6a;
+            border: 2px dotted #ffb6c1;
+            padding: 15px;
+            border-radius: 10px;
+            box-sizing: border-box;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .item:hover {
+            transform: scale(1.05);
+        }
+
+        .item img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .scratch-off-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        /* Canvas overlay for scratch-off effect */
+        .scratch-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ccc;
+            cursor: pointer;
+        }
+
+        /* Scratching state */
+        .scratched {
+            background-color: transparent;
+        }
+
+        .item span {
+            margin-bottom: 10px;
+        }
+
+        .item button {
+            padding: 10px 20px;
+            background-color: #ff5c8d;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+            margin-top: 10px;
+            opacity: 0.5;
+            pointer-events: none; /* Initially disable button */
+        }
+
+        .item button.enabled {
+            opacity: 1;
+            pointer-events: all; /* Enable button when scratched above 60% */
+        }
+
+        .item button:hover {
+            background-color: #ff3385;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <h1>Dopamine Menu</h1>
+
+    <!-- Filter Box -->
+    <div class="filter-container">
+        <!-- Filter for Radius -->
+        <div>
+            <label for="radius">Radius:</label>
+            <select id="radius">
+                <option value="5">5 km</option>
+                <option value="10">10 km</option>
+                <option value="20">20 km</option>
+            </select>
+        </div>
+
+        <!-- Filter for Time Needed -->
+        <div>
+            <label for="time-needed">Time Needed:</label>
+            <select id="time-needed">
+                <option value="30">30 minutes</option>
+                <option value="60">1 hour</option>
+                <option value="120">2 hours</option>
+            </select>
+        </div>
+
+        <!-- Filter for Number of People -->
+        <div>
+            <label for="people-needed">Number of People:</label>
+            <select id="people-needed">
+                <option value="1">1 person</option>
+                <option value="2">2 people</option>
+                <option value="3">3 people</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- White box container for items -->
+    <div class="items-container" id="items-container">
+        <!-- Example item -->
+        <div class="item">
+            <span>Activity 1</span>
+            <div class="scratch-off-container">
+                <!-- Image under the scratch-off effect -->
+                <img src="https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/background.png" alt="Activity Image" class="activity-image">
+                <!-- Canvas for the scratch-off effect -->
+                <canvas class="scratch-canvas"></canvas>
+            </div>
+            <button class="disabled">Select</button>
+        </div>
+        <!-- More items go here -->
+    </div>
+
+    <script>
+        // Function to initialize the scratch-off effect on each item
+        function initScratchEffect() {
+            const scratchElements = document.querySelectorAll('.scratch-off-container');
+
+            scratchElements.forEach(scratchElement => {
+                const canvas = scratchElement.querySelector('.scratch-canvas');
+                const img = scratchElement.querySelector('.activity-image');
+                const button = scratchElement.closest('.item').querySelector('button');
+                const ctx = canvas.getContext('2d');
+
+                // Set the canvas size to match the image size
+                canvas.width = img.width;
+                canvas.height = img.height;
+
+                // Draw a grey scratch layer
+                ctx.fillStyle = '#ccc';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Make the image visible under the scratch layer (covered by canvas initially)
+                canvas.style.backgroundImage = `url(${img.src})`;
+                canvas.style.backgroundSize = 'cover';
+
+                let scratchedArea = 0;
+                let isScratching = false;
+
+                function startScratching(event) {
+                    isScratching = true;
+                    scratch(event);
+                }
+
+                function stopScratching() {
+                    isScratching = false;
+                }
+
+                function scratch(event) {
+                    if (!isScratching) return;
+
+                    // Get mouse position relative to the canvas
+                    const rect = canvas.getBoundingClientRect();
+                    const x = event.clientX - rect.left;
+                    const y = event.clientY - rect.top;
+
+                    // Clear the circle area where the mouse is
+                    ctx.clearRect(x - 10, y - 10, 20, 20);
+
+                    // Increment scratched area
+                    scratchedArea += 0.1; // each move clears a small area
+
+                    // If 60% or more is scratched off, enable the button
+                    if (scratchedArea >= 15) {
+                        button.classList.add('enabled');
+                    }
+                }
+
+                // Mouse event listeners
+                canvas.addEventListener('mousedown', startScratching);
+                canvas.addEventListener('mousemove', scratch);
+                canvas.addEventListener('mouseup', stopScratching);
+                canvas.addEventListener('mouseleave', stopScratching);
+
+                // Touch event listeners for mobile
+                canvas.addEventListener('touchstart', startScratching);
+                canvas.addEventListener('touchmove', scratch);
+                canvas.addEventListener('touchend', stopScratching);
+                canvas.addEventListener('touchcancel', stopScratching);
+            });
+        }
+
+        // Initialize the scratch-off effect after the page loads
+        window.onload = initScratchEffect;
+    </script>
+</body>
 </html>

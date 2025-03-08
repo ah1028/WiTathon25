@@ -22,3 +22,18 @@ https://www.canva.com/design/DAGhJ7_Te4s/VGk1q5nxcIjKBAy6eTUwKw/edit?utm_content
 Run the command in the terminal to start the local webserver
 ```py server.py```
 Then go to http://localhost:8000/ to view the webpage
+
+## Using Flask
+Navigate to the Combining directory in terminal, then run:
+```
+py -m venv .venv
+.venv\Scripts\activate
+py -m pip install -r requirements.txt
+```
+Hopefully, you will then be able to run
+```
+py -m flask --app dopamine_menu run
+```
+And then follow the link in the terminal to the hosted website
+
+Once finished with all work the virtual environment can be deactived by typing ```deactivate``` in the terminal
