@@ -400,4 +400,4 @@ FodyWeavers.xsd
 *.sln.iml
 
 # Ignore virtual environment
-venv/
+**/venv
