@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dopamine Menu</title>
+        <!-- Add Google Font for bubbly font -->
+        <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <h1>Dopamine Menu</h1>
+        <p>Please login.</p>
+        <button onclick="window.location.href='{{url_for('menupage')}}'">Login</button>
+
+        <!-- Strawberry Image (can be swapped with your own) -->
+        <div class="strawberry"></div>
+    </body>
+</html>
