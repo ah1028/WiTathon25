@@ -3,14 +3,30 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dopamine Menu</title>
+        <title>Home Page</title>
+        <style>
+            body {
+                text-align: center;
+                font-family: Arial, sans-serif;
+                margin: 50px;
+            }
+            button {
+                padding: 10px 20px;
+                font-size: 18px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+            button:hover {
+                background-color: #007bff;
+            }
+        </style>
     </head>
-
     <body>
-        <div id="Navbar"></div>
-        <div id="Page content">
-            <h1>Home Page</h1>
-        </div>
-        <!--Page content-->
+        <h1>Welcome to the Home Page</h1>
+        <p>Click the button below to go to the next page.</p>
+        <button onclick="window.location.href='menupage.html'">Go to Next Page</button>
     </body>
 </html>
