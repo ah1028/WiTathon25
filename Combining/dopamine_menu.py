@@ -23,3 +23,10 @@ def login():
 @app.route('/menupage/')
 def menupage():
     return render_template('menupage.html')
+
+@app.route('/new-activity/')
+def new_activity():
+    # image = request.form['image']
+    # print(image)
+
+    return render_template(url_for('new-activity.html'))

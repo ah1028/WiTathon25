@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='new_activity_style.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+        <title>Dopamine Menu</title>
+    </head>
+    <body>
+        <h1>Dopamine Menu</h1>
+
+        <h2>Add New Activity</h2>
+    <!-- New Activity -->
+    <div class="activity-container">
+        <form id="activity-form" method="POST" action="./new-activity"></form>
+        <!-- Image -->
+        <label>Image</label>
+        <input type="file" name="image" id="fileInput" accept="image/*"/>
+        <!-- Location -->
+        <!-- Title -->
+        <label>Activity Title</label>
+        <input type="text" name="title" id="title">
+        <!-- Description -->
+        <label>Activity Description</label>
+        <textarea type="text" name="description" id="description"></textarea>
+        <!-- Expense -->
+        <label>Approximate Expense</label>
+        <input type="number" id="expense" name="expense" min="0" max="1028" step="0.01">
+        <!-- Time of Day -->
+        <label>Time of Day</label>
+        <select id="dropdown" name="tod">
+          <option value="A">Anytime</option>
+          <option value="B4">Before dark</option>
+          <option value="AD">After dark</option>
+        </select>
+        <!-- People min, max -->
+        <div id="people-div">
+            <label>Number of People</label>
+            <label>Minimum Number</label>
+            <input type="number" id="min-people" name="min-people" min="1" max="20" step="1">
+            <label>Maximum Number</label>
+            <input type="number" id="max-people" name="max-people" min="1" max="20" step="1">
+            <p id="error-message" style="color: red; display: none;">Min must be less than Max</p>
+        </div>
+        <!-- Tags -->
+        <div id="tags-div">
+            <label>Tags</label>
+              <input id="exercise" name="exercise" type="checkbox" value="True">Exercise
+              <input id="art" name="art" type="checkbox" value="True">Art
+              <input id="mindfullness" name="mindfullness" type="checkbox" value="True">Mindfullness
+            </div>
+            <!-- <button onclick="window.location.href='{{url_for('menupage')}}';">Submit</button> -->
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("min-people").addEventListener("input", validateMinMax);
+        document.getElementById("max-people").addEventListener("input", validateMinMax);
+
+        function validateMinMax() {
+            const minPeople = document.getElementById("min-people").value;
+            const maxPeople = document.getElementById("max-people").value;
+            const errorMessage = document.getElementById("error-message");
+
+            if (minPeople && maxPeople && parseInt(minPeople) >= parseInt(maxPeople)) {
+                errorMessage.style.display = "block";
+            } else {
+                errorMessage.style.display = "none";
+            }
+        }
+    </script>
+    </body>
+</html>
