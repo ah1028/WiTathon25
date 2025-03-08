@@ -12,15 +12,15 @@ CREATE TABLE IF NOT EXISTS activities (
     activity_id INTEGER PRIMARY KEY,
     title TEXT CHECK (LENGTH(title) <= 30),
     description TEXT,
-    tags TEXT CHECK (LENGTH(tags) <= 20),
-    pict_url TEXT,
+    picture BLOB,
     expense REAL,
-    blah TEXT,
+    time_of_day TEXT,
     duration INTEGER,
     longitude REAL,
     latitude REAL,
     min_people INTEGER, 
     max_people INTEGER CHECK (max_people = -1 OR max_people > 0)
+    FOREIGN KEY (picture) REFERENCES images(image_id)
 );
 """
 

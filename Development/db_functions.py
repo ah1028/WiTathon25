@@ -1,7 +1,6 @@
 import sqlite3
 import bcrypt
 
-
 ## HASH PW w/bcrypt ## 
 def hash_password(password):
     salt = bcrypt.gensalt()  # Generate a salt
@@ -48,5 +47,29 @@ def signup(email_input, username_input, password_input):
     conn.close()
     return False # Username/Email already exists
 
+
+## ACTIVITIES ## 
+def add_activity(title, descript, pic, expen, tod, time, loc,  min, max, tags):
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+
+    x , y = loc #loc = tuple of location long/latitude
+
+    # takes picture location and creates BLOB
+    with open(pic, "rb") as image_file:
+        pic_blob = image_file.read()
+
+    cursor.execute("INSERT INTO activities (title,description, picture, expense, time_of_day, duration, longitude, latitude, min_people, max_people) VALUES (?,?,?,?,?,?,?,?,?,?);"
+                   ,(title,descript,pic_blob, expen, tod, time, x,y , min, max))
+
+
+def image_to_blob(pic):
+    try:
+        with open(pic, "rb") as image_file:
+            image_blob = image_file.read()
+
+        return True
+    except:
+        return False
 
 
