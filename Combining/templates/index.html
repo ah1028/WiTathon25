@@ -14,26 +14,19 @@
         <!-- Login Section -->
         <div class="login-container">
             <h2>Login</h2>
-            <input type="text" placeholder="Username" id="username">
-            <input type="password" placeholder="Password" id="password">
-            <button onclick="window.location.href='{{url_for('menupage')}}';">Login</button>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+            {% endwith %}
+            <form method="POST" action="./login">
+                <input type="text" name="username" placeholder="Username" id="username">
+                <input type="password" name="password" placeholder="Password" id="password">
+                <button onclick="window.location.href='{{url_for('menupage')}}';">Login</button>
+            </form>
             <p class="register-link">Don't have an account? <a href="register.html">Register here</a></p>
         </div>
-
-        <!-- <script>
-            // Login function (You can replace this with actual authentication logic later)
-            function login() {
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                
-                // Simple alert to simulate login action
-                if (username && password) {
-                    alert('Login successful! Redirecting to menu...');
-                    window.location.href = 'menupage.html';  // Redirect to the menu page
-                } else {
-                    alert('Please enter both username and password!');
-                }
-            }
-        </script> -->
     </body>
 </html>
