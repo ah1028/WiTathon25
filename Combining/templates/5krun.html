@@ -7,14 +7,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+    button {
+        padding: 10px 20px;
+        background-color: #ff5c8d;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: 0.3s;
+        margin-top: 10px;
+    }</style>
 </head>
 <body>
 
-    <h1>Activity Name</h1>
+    <h1>5km Run</h1>
 
     <div class="activity-container">
         <img src="https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/your-image-here.jpg" alt="Activity Image">
-        <p>Here is the detailed description of the activity. Add more information about the activity here.</p>
+        <p>Go for a 5km run</p>
     </div>
 
     <button class="back-button" onclick="window.location.href='{{url_for('menupage')}}';">Back to Menu</button>
