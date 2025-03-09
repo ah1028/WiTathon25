@@ -28,6 +28,18 @@ def menupage():
 def baking_brownies():
     return render_template('bakingbrownies.html')
 
+@app.route('/5k-run')
+def short_run():
+    return render_template('5krun.html')
+
+@app.route('/pottery')
+def pottery():
+    return render_template('potterypainting.html')
+
+@app.route('/meditation')
+def meditation():
+    return render_template('10minsmeditation.html')
+
 @app.route('/new-activity/', methods=('GET', 'POST'))
 def new_activity():
     if request.method == 'POST':
