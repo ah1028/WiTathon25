@@ -24,6 +24,10 @@ def login():
 def menupage():
     return render_template('menupage.html')
 
+@app.route('/baking-brownies')
+def baking_brownies():
+    return render_template('bakingbrownies.html')
+
 @app.route('/new-activity/', methods=('GET', 'POST'))
 def new_activity():
     if request.method == 'POST':
@@ -44,3 +48,7 @@ def new_activity():
             db.add_activity(title, desc, image, exp, tod, time, lon, lat, mini, maxi, tags)
             return redirect(url_for('menupage'))
     return render_template('new-activity.html')
+
+@app.route('/images/<id>.jpg')
+def images(image_id):
+    return db.activity_pic(image_id)

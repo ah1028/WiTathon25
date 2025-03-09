@@ -48,89 +48,112 @@
     <div class="items-container" id="items-container">
         <!-- Example item -->
         <div class="item">
-            <span>Activity 1</span>
+            <span data-activity-title="Baking Brownies">Activity 1</span>
             <div class="scratch-off-container">
-                <!-- Image under the scratch-off effect -->
-                <img src="https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/background.png" alt="Activity Image" class="activity-image">
-                <!-- Canvas for the scratch-off effect -->
+                <img src="https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/cooking_icon.jpg" alt="Baking Brownies" class="activity-image">
                 <canvas class="scratch-canvas"></canvas>
             </div>
-            <button class="disabled">Select</button>
+            <button class="disabled" data-url="{{url_for('baking_brownies')}}">Select</button>
         </div>
-        <!-- More items go here -->
+        <div class="item">
+            <span data-activity-title="Going on a 5km Run">Activity 2</span>
+            <div class="scratch-off-container">
+                <img src="https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/exercise_icon.jpg" alt="Going on a 5km Run" class="activity-image">
+                <canvas class="scratch-canvas"></canvas>
+            </div>
+            <button class="disabled" data-url="5kmrun.html">Select</button>
+        </div>
+        <div class="item">
+            <span data-activity-title="Pottery Painting">Activity 3</span>
+            <div class="scratch-off-container">
+                <img src="https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/art_icon.png" alt="Pottery Painting" class="activity-image">
+                <canvas class="scratch-canvas"></canvas>
+            </div>
+            <button class="disabled" data-url="potterypainting.html">Select</button>
+        </div>
+        <div class="item">
+            <span data-activity-title="10 Minutes of Meditation">Activity 4</span>
+            <div class="scratch-off-container">
+                <img src="https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/relax_icon.png" alt="10 Minutes of Meditation" class="activity-image">
+                <canvas class="scratch-canvas"></canvas>
+            </div>
+            <button class="disabled" data-url="10minsmeditation.html">Select</button>
+        </div>
     </div>
 
     <script>
-        // Function to initialize the scratch-off effect on each item
         function initScratchEffect() {
             const scratchElements = document.querySelectorAll('.scratch-off-container');
-
+        
             scratchElements.forEach(scratchElement => {
                 const canvas = scratchElement.querySelector('.scratch-canvas');
                 const img = scratchElement.querySelector('.activity-image');
                 const button = scratchElement.closest('.item').querySelector('button');
+                const activityTitle = scratchElement.closest('.item').querySelector('span'); // Get the title span
                 const ctx = canvas.getContext('2d');
-
-                // Set the canvas size to match the image size
+        
                 canvas.width = img.width;
                 canvas.height = img.height;
-
-                // Draw a grey scratch layer
+        
                 ctx.fillStyle = '#ccc';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                // Make the image visible under the scratch layer (covered by canvas initially)
+        
                 canvas.style.backgroundImage = `url(${img.src})`;
                 canvas.style.backgroundSize = 'cover';
-
+        
                 let scratchedArea = 0;
                 let isScratching = false;
-
+        
                 function startScratching(event) {
                     isScratching = true;
                     scratch(event);
                 }
-
+        
                 function stopScratching() {
                     isScratching = false;
                 }
-
+        
                 function scratch(event) {
                     if (!isScratching) return;
-
-                    // Get mouse position relative to the canvas
+        
                     const rect = canvas.getBoundingClientRect();
                     const x = event.clientX - rect.left;
                     const y = event.clientY - rect.top;
-
-                    // Clear the circle area where the mouse is
+        
                     ctx.clearRect(x - 10, y - 10, 20, 20);
-
-                    // Increment scratched area
-                    scratchedArea += 0.1; // each move clears a small area
-
-                    // If 60% or more is scratched off, enable the button
+                    scratchedArea += 0.1;
+        
                     if (scratchedArea >= 15) {
                         button.classList.add('enabled');
+        
+                        // Change the title dynamically
+                        const newTitle = activityTitle.getAttribute('data-activity-title');
+                        activityTitle.textContent = newTitle;
+        
+                        // Enable the button to be clickable
+                        button.addEventListener('click', function() {
+                            // Only navigate if button is enabled
+                            if (button.classList.contains('enabled')) {
+                                const url = button.getAttribute('data-url');
+                                window.location.href = url;
+                            }
+                        });
                     }
                 }
-
-                // Mouse event listeners
+        
                 canvas.addEventListener('mousedown', startScratching);
                 canvas.addEventListener('mousemove', scratch);
                 canvas.addEventListener('mouseup', stopScratching);
                 canvas.addEventListener('mouseleave', stopScratching);
-
-                // Touch event listeners for mobile
+        
                 canvas.addEventListener('touchstart', startScratching);
                 canvas.addEventListener('touchmove', scratch);
                 canvas.addEventListener('touchend', stopScratching);
                 canvas.addEventListener('touchcancel', stopScratching);
             });
         }
-
-        // Initialize the scratch-off effect after the page loads
-        window.onload = initScratchEffect;
-    </script>
+        
+            window.onload = initScratchEffect;
+            </script>
     </body>
 </html>

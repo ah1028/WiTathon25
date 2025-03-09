@@ -16,10 +16,10 @@
     <!-- New Activity -->
     <div class="activity-container">
         <form id="activity-form" method="POST">
-            <div id="left-panel">
+        <div id="left-panel">
         <!-- Image -->
         <label>Image</label>
-        <input type="file" name="image" id="fileInput" accept="image/*" value="{{ request.form['image'] }}">
+        <input type="file" name="image" id="fileInput" accept="image/*" value="{{ request.form['image'] }}"><br>
         <!-- Location -->
         <div id="map"></div>
         <p id="coords">Click on the map to select a location.</p>
@@ -48,7 +48,7 @@
         </select>
         <!-- People min, max -->
         <div id="people-div">
-            <label>Number of People</label>
+            <label>Number of People</label><br>
             <label>Minimum Number</label>
             <input type="number" id="min-people" name="mini" min="1" max="20" step="1" value="{{ request.form['mini'] }}">
             <label>Maximum Number</label>
@@ -57,7 +57,7 @@
         </div>
         <!-- Tags -->
         <div id="tags-div">
-            <label>Tags</label>
+            <label>Tags</label><br>
               <input id="exercise" name="exercise" type="checkbox" value="Active">Active
               <input id="art" name="art" type="checkbox" value="Creative">Creative
               <input id="mindfullness" name="mindfullness" type="checkbox" value="Mindfullness">Mindfullness
