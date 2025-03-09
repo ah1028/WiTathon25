@@ -13,8 +13,7 @@ git push
 Look at StartingPoint for a basic idea, all development and running the server should be done from Development folder
 
 ### Database 
-![image](https://github.com/user-attachments/assets/f98f3559-7b69-43b0-a028-d8315c472ab8)
-
+![image](https://github.com/user-attachments/assets/e0a9e0ac-b656-474e-a758-16213a2150e0)
 
 UI - Canva
 https://www.canva.com/design/DAGhJ7_Te4s/VGk1q5nxcIjKBAy6eTUwKw/edit?utm_content=DAGhJ7_Te4s&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
