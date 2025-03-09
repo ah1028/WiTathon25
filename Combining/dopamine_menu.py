@@ -27,6 +27,7 @@ def menupage():
 @app.route('/new-activity/', methods=('GET', 'POST'))
 def new_activity():
     if request.method == 'POST':
+        image = request.form['image']
         title = request.form['title']
         desc = request.form['description']
         exp = request.form['expense']
@@ -37,5 +38,6 @@ def new_activity():
         if not title:
             flash('Title is required!')
         else:
+            print(image)
             return redirect(url_for('menupage'))
     return render_template('new-activity.html')

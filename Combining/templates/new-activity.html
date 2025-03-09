@@ -17,7 +17,7 @@
         <form id="activity-form" method="POST">
         <!-- Image -->
         <label>Image</label>
-        <input type="file" name="image" id="fileInput" accept="image/*"/>
+        <input type="file" name="image" id="fileInput" accept="image/*" value="{{ request.form['image'] }}">
         <!-- Location -->
 
         <!-- Title -->
