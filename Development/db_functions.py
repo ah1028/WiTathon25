@@ -94,7 +94,7 @@ def connect_tag(tag, activ_id):
         tag_id = cursor.lastrowid
     
     cursor.execute("INSERT INTO activity_tags (activity_id, tag_id) VALUES (?, ?);", tag_id, activ_id)
-Ellipsis
+
 # Return tags
 def return_tags():
     conn = sqlite3.connect("database.db")
@@ -102,7 +102,7 @@ def return_tags():
 
     # Fetch all tag names
     cursor.execute("SELECT tag_name FROM tags")
-    tags = [row[0] for row in cursor.fetchall()]  # Extract tag names from rows
+    tags = [row[0] for row in cursor.fetchall()]  
 
     conn.close()
 
