@@ -50,14 +50,14 @@ def signup(email_input, username_input, password_input):
 
 ## ACTIVITIES ## 
 ## ADD ##
-def add_activity(title, descript, pic, expen, tod, time, loc,  min, max, tags):
+def add_activity(title, descript, pic, expen, tod, time, long, lat,  min, max, tags):
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
     x , y = loc #loc = tuple of location long/latitude
 
     cursor.execute("INSERT INTO activities (title,description, picture, expense, time_of_day, duration, longitude, latitude, min_people, max_people) VALUES (?,?,?,?,?,?,?,?,?,?);"
-                   ,(title, descript, pic, expen, tod, time, x ,y , min, max))
+                   ,(title, descript, pic, expen, tod, time, long ,lat , min, max))
     conn.commit()
     conn.close()
     
@@ -68,7 +68,20 @@ def add_activity(title, descript, pic, expen, tod, time, loc,  min, max, tags):
             connect_tag(tag, activ_ID)
 
 
+## RETURN PIC ##
+def activity_pic(activ_ID):
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT picture FROM activities WHERE activity_id = ?", (activ_ID,))
+    picture = cursor.fetchone()
+    conn.close()
+
+    return picture # could potentially return NULL
+
+
 ## TAGS ##
+# Connect tags
 def connect_tag(tag, activ_id):
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
@@ -82,15 +95,17 @@ def connect_tag(tag, activ_id):
     
     cursor.execute("INSERT INTO activity_tags (activity_id, tag_id) VALUES (?, ?);", tag_id, activ_id)
 
-## RETURN PIC ##
-def activity_pic(activ_ID):
+# Return tags
+def return_tags():
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
-    cursor.execute("SELECT picture FROM activities WHERE activity_id = ?", (activ_ID,))
-    picture = cursor.fetchone()
+    # Fetch all tag names
+    cursor.execute("SELECT tag_name FROM tags")
+    tags = [row[0] for row in cursor.fetchall()]  # Extract tag names from rows
+
     conn.close()
 
-    return picture # could potentially return NULL
+    return tags
 
 

@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS activities (
     description TEXT,
     picture BLOB,
     expense REAL,
-    time_of_day TEXT,
+    time_of_day TEXT (LENGTH(title) <= 2),
     duration INTEGER,
     longitude REAL,
     latitude REAL,
