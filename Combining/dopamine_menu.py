@@ -28,6 +28,8 @@ def menupage():
 def new_activity():
     if request.method == 'POST':
         image = request.form['image']
+        lat = request.form['latitude']
+        lon = request.form['longitude']
         title = request.form['title']
         desc = request.form['description']
         exp = request.form['expense']
@@ -38,6 +40,5 @@ def new_activity():
         if not title:
             flash('Title is required!')
         else:
-            print(image)
             return redirect(url_for('menupage'))
     return render_template('new-activity.html')
