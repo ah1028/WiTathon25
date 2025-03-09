@@ -1,0 +1,130 @@
+/* Filter Box */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 30px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #4f5d44;
+}
+
+.filter-container div {
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+}
+
+.filter-container label {
+    font-size: 18px;
+    margin-right: 10px; /* Adjust space between label and dropdown */
+}
+
+.filter-container select {
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Items container */
+.items-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1240px;
+    background-color: white;
+    padding: 30px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-height: 400vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 24px;
+    color: #ff3d6a;
+    border: 2px dotted #ffb6c1;
+    padding: 15px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    transition: 0.3s;
+    position: relative;
+}
+
+.item:hover {
+    transform: scale(1.05);
+}
+
+.item img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.scratch-off-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+/* Canvas overlay for scratch-off effect */
+.scratch-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+/* Scratching state */
+.scratched {
+    background-color: transparent;
+}
+
+.item span {
+    margin-bottom: 10px;
+}
+
+.item button {
+    padding: 10px 20px;
+    background-color: #ff5c8d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+    margin-top: 10px;
+    opacity: 0.5;
+    pointer-events: none; /* Initially disable button */
+}
+
+.item button.enabled {
+    opacity: 1;
+    pointer-events: all; /* Enable button when scratched above 60% */
+}
+
+.item button:hover {
+    background-color: #ff3385;
+    transform: scale(1.05);
+}

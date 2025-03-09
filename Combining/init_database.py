@@ -12,9 +12,10 @@ CREATE TABLE IF NOT EXISTS activities (
     activity_id INTEGER PRIMARY KEY,
     title TEXT CHECK (LENGTH(title) <= 30),
     description TEXT,
-    picture BLOB,
+    tags TEXT CHECK (LENGTH(tags) <= 20),
+    pict_url TEXT,
     expense REAL,
-    time_of_day TEXT (LENGTH(title) <= 2),
+    blah TEXT,
     duration INTEGER,
     longitude REAL,
     latitude REAL,
@@ -73,11 +74,6 @@ CREATE TABLE user_favorites (
 # Execute the SQL commands
 cursor.execute(create_activities_table)
 cursor.execute(create_users_table)
-cursor.execute(create_tags_table)
-cursor.execute(create_activity_tags_table)
-cursor.execute(user_faves)
-cursor.execute(user_compeleted)
-
 
 # Commit changes and close connection
 conn.commit()

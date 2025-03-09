@@ -12,7 +12,6 @@ def login(username_input, password_input):
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
-
     # Fetch the hashed password for the given username
     cursor.execute("SELECT password FROM users WHERE username = ?", (username_input,))
     user = cursor.fetchone()
@@ -54,32 +53,12 @@ def add_activity(title, descript, pic, expen, tod, time, long, lat,  min, max, t
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
-    cursor.execute("INSERT INTO activities (title, description, picture, expense, time_of_day, duration, longitude, latitude, min_people, max_people) VALUES (?,?,?,?,?,?,?,?,?,?);"
+    cursor.execute("INSERT INTO activities (title,description, picture, expense, time_of_day, duration, longitude, latitude, min_people, max_people) VALUES (?,?,?,?,?,?,?,?,?,?);"
                    ,(title, descript, pic, expen, tod, time, long ,lat , min, max))
     conn.commit()
     conn.close()
-    
-    if tags is not None: 
-        activ_ID = cursor.lastrowid
-
-        for tag in tags:
-            connect_tag(tag, activ_ID)
-
-
-## RETURN PIC ##
-def activity_pic(activ_ID):
-    conn = sqlite3.connect("database.db")
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT picture FROM activities WHERE activity_id = ?", (activ_ID,))
-    picture = cursor.fetchone()
-    conn.close()
-
-    return picture # could potentially return NULL
-
 
 ## TAGS ##
-# Connect tags
 def connect_tag(tag, activ_id):
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
@@ -93,17 +72,25 @@ def connect_tag(tag, activ_id):
     
     cursor.execute("INSERT INTO activity_tags (activity_id, tag_id) VALUES (?, ?);", tag_id, activ_id)
 
-# Return tags
+## RETURN PIC ##
+def activity_pic(activ_ID):
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT picture FROM activities WHERE activity_id = ?", (activ_ID,))
+    picture = cursor.fetchone()
+    conn.close()
+
+    return picture # could potentially return NULL
+
 def return_tags():
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
     # Fetch all tag names
     cursor.execute("SELECT tag_name FROM tags")
-    tags = [row[0] for row in cursor.fetchall()]  
+    tags = [row[0] for row in cursor.fetchall()]  # Extract tag names from rows
 
     conn.close()
 
     return tags
-
-

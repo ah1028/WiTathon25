@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='new_activity_style.css') }}">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+        <title>Dopamine Menu</title>
+    </head>
+    <body>
+        <h1>Dopamine Menu</h1>
+
+        <h2>Add New Activity</h2>
+    <!-- New Activity -->
+    <div class="activity-container">
+        <form id="activity-form" method="POST">
+            <div id="left-panel">
+        <!-- Image -->
+        <label>Image</label>
+        <input type="file" name="image" id="fileInput" accept="image/*" value="{{ request.form['image'] }}">
+        <!-- Location -->
+        <div id="map"></div>
+        <p id="coords">Click on the map to select a location.</p>
+        <input type="hidden" id="latitude" name="latitude" value="{{ request.form['latitude'] }}">
+        <input type="hidden" id="longitude" name="longitude" value="{{ request.form['longitude'] }}">
+        <!-- Duration -->
+        <label>Duration</label>
+        <input type="time" id="duration" name="duration" value="{{ request.form['duration'] }}">
+    </div>
+    <div id="right-panel">
+        <!-- Title -->
+        <label>Activity Title</label>
+        <input type="text" name="title" id="title" value="{{ request.form['title'] }}" required>
+        <!-- Description -->
+        <label>Activity Description</label>
+        <textarea type="text" name="description" id="description" value="{{ request.form['description'] }}"></textarea>
+        <!-- Expense -->
+        <label>Approximate Expense</label>
+        <input type="number" id="expense" name="expense" min="0" max="1028" step="0.01" value="{{ request.form['expense'] }}" required>
+        <!-- Time of Day -->
+        <label>Time of Day</label>
+        <select id="dropdown" name="tod">
+          <option value="A">Anytime</option>
+          <option value="B4">Before dark</option>
+          <option value="AD">After dark</option>
+        </select>
+        <!-- People min, max -->
+        <div id="people-div">
+            <label>Number of People</label>
+            <label>Minimum Number</label>
+            <input type="number" id="min-people" name="mini" min="1" max="20" step="1" value="{{ request.form['mini'] }}">
+            <label>Maximum Number</label>
+            <input type="number" id="max-people" name="maxi" min="1" max="20" step="1" value="{{ request.form['maxi'] }}">
+            <p id="error-message" style="color: red; display: none;">Min must be less than Max</p>
+        </div>
+        <!-- Tags -->
+        <div id="tags-div">
+            <label>Tags</label>
+              <input id="exercise" name="exercise" type="checkbox" value="Active">Active
+              <input id="art" name="art" type="checkbox" value="Creative">Creative
+              <input id="mindfullness" name="mindfullness" type="checkbox" value="Mindfullness">Mindfullness
+            </div>
+            <button type="submit" onclick="window.location.href='{{url_for('menupage')}}';">Submit</button>
+        </form>
+    </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        document.getElementById("min-people").addEventListener("input", validateMinMax);
+        document.getElementById("max-people").addEventListener("input", validateMinMax);
+
+        function validateMinMax() {
+            const minPeople = document.getElementById("min-people").value;
+            const maxPeople = document.getElementById("max-people").value;
+            const errorMessage = document.getElementById("error-message");
+
+            if (minPeople && maxPeople && parseInt(minPeople) >= parseInt(maxPeople)) {
+                errorMessage.style.display = "block";
+            } else {
+                errorMessage.style.display = "none";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+        var map = L.map('map').setView([51.505, -0.09], 5); // Default to London
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        var marker;
+
+        // Click event listener
+        map.on('click', function(e) {
+            var lat = e.latlng.lat;
+            var lng = e.latlng.lng;
+
+            // Update the hidden form fields
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = lng;
+
+            // Display coordinates
+            document.getElementById('coords').textContent = `Coordinates: ${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+
+            // Remove existing marker (if any) and add new one
+            if (marker) {
+                map.removeLayer(marker);
+            }
+            marker = L.marker([lat, lng]).addTo(map)
+                .bindPopup(`Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)}`)
+                .openPopup();
+        });});
+    </script>
+    </body>
+</html>
