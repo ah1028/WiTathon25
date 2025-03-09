@@ -49,27 +49,48 @@ def signup(email_input, username_input, password_input):
 
 
 ## ACTIVITIES ## 
+## ADD ##
 def add_activity(title, descript, pic, expen, tod, time, loc,  min, max, tags):
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
     x , y = loc #loc = tuple of location long/latitude
 
-    # takes picture location and creates BLOB
-    with open(pic, "rb") as image_file:
-        pic_blob = image_file.read()
-
     cursor.execute("INSERT INTO activities (title,description, picture, expense, time_of_day, duration, longitude, latitude, min_people, max_people) VALUES (?,?,?,?,?,?,?,?,?,?);"
-                   ,(title,descript,pic_blob, expen, tod, time, x,y , min, max))
+                   ,(title, descript, pic, expen, tod, time, x ,y , min, max))
+    conn.commit()
+    conn.close()
+    
+    if tags is not None: ## !! FIX THIS ##
+        activ_ID = cursor.lastrowid
+
+        for tag in tags:
+            connect_tag(tag, activ_ID)
 
 
-def image_to_blob(pic):
-    try:
-        with open(pic, "rb") as image_file:
-            image_blob = image_file.read()
+## TAGS ##
+def connect_tag(tag, activ_id):
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
 
-        return True
-    except:
-        return False
+    cursor.execute("SELECT tag_id FROM tags WHERE tag_name = ?;", (tag,))
+    tag_id = cursor.fetchone()
+
+    if tag_id is None:
+        cursor.execute("INSERT INTO tags (tag_name) VALUES (?);", (tag,))
+        tag_id = cursor.lastrowid
+    
+    cursor.execute("INSERT INTO activity_tags (activity_id, tag_id) VALUES (?, ?);", tag_id, activ_id)
+
+## RETURN PIC ##
+def activity_pic(activ_ID):
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT picture FROM activities WHERE activity_id = ?", (activ_ID,))
+    picture = cursor.fetchone()
+    conn.close()
+
+    return picture # could potentially return NULL
 
 
