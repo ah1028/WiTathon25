@@ -20,7 +20,6 @@ CREATE TABLE IF NOT EXISTS activities (
     latitude REAL,
     min_people INTEGER, 
     max_people INTEGER CHECK (max_people = -1 OR max_people > 0)
-    FOREIGN KEY (picture) REFERENCES images(image_id)
 );
 """
 
@@ -74,6 +73,11 @@ CREATE TABLE user_favorites (
 # Execute the SQL commands
 cursor.execute(create_activities_table)
 cursor.execute(create_users_table)
+cursor.execute(create_tags_table)
+cursor.execute(create_activity_tags_table)
+cursor.execute(user_faves)
+cursor.execute(user_compeleted)
+
 
 # Commit changes and close connection
 conn.commit()
