@@ -47,4 +47,50 @@ def signup(email_input, username_input, password_input):
     return False # Username/Email already exists
 
 
+## ACTIVITIES ## 
+## ADD ##
+def add_activity(title, descript, pic, expen, tod, time, long, lat,  min, max, tags):
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
 
+    cursor.execute("INSERT INTO activities (title,description, picture, expense, time_of_day, duration, longitude, latitude, min_people, max_people) VALUES (?,?,?,?,?,?,?,?,?,?);"
+                   ,(title, descript, pic, expen, tod, time, long ,lat , min, max))
+    conn.commit()
+    conn.close()
+
+## TAGS ##
+def connect_tag(tag, activ_id):
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT tag_id FROM tags WHERE tag_name = ?;", (tag,))
+    tag_id = cursor.fetchone()
+
+    if tag_id is None:
+        cursor.execute("INSERT INTO tags (tag_name) VALUES (?);", (tag,))
+        tag_id = cursor.lastrowid
+    
+    cursor.execute("INSERT INTO activity_tags (activity_id, tag_id) VALUES (?, ?);", tag_id, activ_id)
+
+## RETURN PIC ##
+def activity_pic(activ_ID):
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT picture FROM activities WHERE activity_id = ?", (activ_ID,))
+    picture = cursor.fetchone()
+    conn.close()
+
+    return picture # could potentially return NULL
+
+def return_tags():
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+
+    # Fetch all tag names
+    cursor.execute("SELECT tag_name FROM tags")
+    tags = [row[0] for row in cursor.fetchall()]  # Extract tag names from rows
+
+    conn.close()
+
+    return tags

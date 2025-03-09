@@ -30,6 +30,7 @@ def new_activity():
         image = request.form['image']
         lat = request.form['latitude']
         lon = request.form['longitude']
+        time = request.form['duration']
         title = request.form['title']
         desc = request.form['description']
         exp = request.form['expense']
@@ -40,5 +41,6 @@ def new_activity():
         if not title:
             flash('Title is required!')
         else:
+            db.add_activity(title, desc, image, exp, tod, time, lon, lat, mini, maxi, tags)
             return redirect(url_for('menupage'))
     return render_template('new-activity.html')

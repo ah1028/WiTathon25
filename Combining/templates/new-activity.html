@@ -25,6 +25,9 @@
         <p id="coords">Click on the map to select a location.</p>
         <input type="hidden" id="latitude" name="latitude" value="{{ request.form['latitude'] }}">
         <input type="hidden" id="longitude" name="longitude" value="{{ request.form['longitude'] }}">
+        <!-- Duration -->
+        <label>Duration</label>
+        <input type="time" id="duration" name="duration" value="{{ request.form['duration'] }}">
     </div>
     <div id="right-panel">
         <!-- Title -->
