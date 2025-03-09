@@ -94,7 +94,7 @@ def connect_tag(tag, activ_id):
         tag_id = cursor.lastrowid
     
     cursor.execute("INSERT INTO activity_tags (activity_id, tag_id) VALUES (?, ?);", tag_id, activ_id)
-
+Ellipsis
 # Return tags
 def return_tags():
     conn = sqlite3.connect("database.db")
