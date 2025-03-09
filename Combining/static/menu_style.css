@@ -129,7 +129,7 @@
     transform: scale(1.05);
 }
 
-#new-act-btn {
+.new-act-btn {
     padding: 10px 20px;
     background-color: #ff5c8d;
     color: white;

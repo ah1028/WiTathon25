@@ -9,8 +9,10 @@
         <title>Dopamine Menu</title>
     </head>
     <body>
+        <div id="intro">
         <h1>Dopamine Menu</h1>
-
+        <button class="new-act-btn" onclick="window.location.href='index.html'">Logout</button>
+    </div>
     <!-- Filter Box -->
     <div class="filter-container">
         <!-- Filter for Radius -->
@@ -50,7 +52,7 @@
         <div class="item">
             <span data-activity-title="Baking Brownies">Activity 1</span>
             <div class="scratch-off-container">
-                <img src="https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/cooking_icon.jpg" alt="Baking Brownies" class="activity-image">
+                <img src="https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/brownies.jpg" alt="Baking Brownies" class="activity-image">
                 <canvas class="scratch-canvas"></canvas>
             </div>
             <button class="disabled" data-url="{{url_for('baking_brownies')}}">Select</button>
@@ -58,7 +60,7 @@
         <div class="item">
             <span data-activity-title="Going on a 5km Run">Activity 2</span>
             <div class="scratch-off-container">
-                <img src="https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/exercise_icon.jpg" alt="Going on a 5km Run" class="activity-image">
+                <img src="https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/royal_cresent.jpg" alt="Going on a 5km Run" class="activity-image">
                 <canvas class="scratch-canvas"></canvas>
             </div>
             <button class="disabled" data-url="{{url_for('short_run')}}">Select</button>
@@ -66,7 +68,7 @@
         <div class="item">
             <span data-activity-title="Pottery Painting">Activity 3</span>
             <div class="scratch-off-container">
-                <img src="https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/art_icon.png" alt="Pottery Painting" class="activity-image">
+                <img src="https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/pottery.jpeg" alt="Pottery Painting" class="activity-image">
                 <canvas class="scratch-canvas"></canvas>
             </div>
             <button class="disabled" data-url="{{url_for('pottery')}}">Select</button>
@@ -74,7 +76,7 @@
         <div class="item">
             <span data-activity-title="10 Minutes of Meditation">Activity 4</span>
             <div class="scratch-off-container">
-                <img src="https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/relax_icon.png" alt="10 Minutes of Meditation" class="activity-image">
+                <img src="https://raw.githubusercontent.com/ah1028/WiTathon25/refs/heads/main/Development/meditation.jpg" alt="10 Minutes of Meditation" class="activity-image">
                 <canvas class="scratch-canvas"></canvas>
             </div>
             <button class="disabled" data-url="{{url_for('meditation')}}">Select</button>
@@ -82,9 +84,9 @@
     </div>
 
     <div class="items-container" id="items-container">
-        <button id="new-act-btn" onclick="window.location.href='{{url_for('new_activity')}}';">Add Activity</button>
+        <button class="new-act-btn" onclick="window.location.href='{{url_for('new_activity')}}';">Add Activity</button>
     </div>
-
+    
     <script>
         function initScratchEffect() {
             const scratchElements = document.querySelectorAll('.scratch-off-container');
