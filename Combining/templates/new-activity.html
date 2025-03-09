@@ -14,20 +14,21 @@
         <h2>Add New Activity</h2>
     <!-- New Activity -->
     <div class="activity-container">
-        <form id="activity-form" method="POST" action="./submit-activity">
+        <form id="activity-form" method="POST">
         <!-- Image -->
         <label>Image</label>
         <input type="file" name="image" id="fileInput" accept="image/*"/>
         <!-- Location -->
+
         <!-- Title -->
         <label>Activity Title</label>
-        <input type="text" name="title" id="title">
+        <input type="text" name="title" id="title" value="{{ request.form['title'] }}" required>
         <!-- Description -->
         <label>Activity Description</label>
-        <textarea type="text" name="description" id="description"></textarea>
+        <textarea type="text" name="description" id="description" value="{{ request.form['description'] }}"></textarea>
         <!-- Expense -->
         <label>Approximate Expense</label>
-        <input type="number" id="expense" name="expense" min="0" max="1028" step="0.01">
+        <input type="number" id="expense" name="expense" min="0" max="1028" step="0.01" value="{{ request.form['expense'] }}" required>
         <!-- Time of Day -->
         <label>Time of Day</label>
         <select id="dropdown" name="tod">
@@ -39,19 +40,19 @@
         <div id="people-div">
             <label>Number of People</label>
             <label>Minimum Number</label>
-            <input type="number" id="min-people" name="min-people" min="1" max="20" step="1">
+            <input type="number" id="min-people" name="mini" min="1" max="20" step="1" value="{{ request.form['mini'] }}">
             <label>Maximum Number</label>
-            <input type="number" id="max-people" name="max-people" min="1" max="20" step="1">
+            <input type="number" id="max-people" name="maxi" min="1" max="20" step="1" value="{{ request.form['maxi'] }}">
             <p id="error-message" style="color: red; display: none;">Min must be less than Max</p>
         </div>
         <!-- Tags -->
         <div id="tags-div">
             <label>Tags</label>
-              <input id="exercise" name="exercise" type="checkbox" value="True">Exercise
-              <input id="art" name="art" type="checkbox" value="True">Art
-              <input id="mindfullness" name="mindfullness" type="checkbox" value="True">Mindfullness
+              <input id="exercise" name="exercise" type="checkbox" value="Exercise">Exercise
+              <input id="art" name="art" type="checkbox" value="Art">Art
+              <input id="mindfullness" name="mindfullness" type="checkbox" value="Mindfullness">Mindfullness
             </div>
-            <button onclick="window.location.href='{{url_for('menupage')}}';">Submit</button>
+            <button type="submit" onclick="window.location.href='{{url_for('menupage')}}';">Submit</button>
         </form>
     </div>
 
