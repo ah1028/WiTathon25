@@ -128,3 +128,14 @@
     background-color: #ff3385;
     transform: scale(1.05);
 }
+
+#new-act-btn {
+    padding: 10px 20px;
+    background-color: #ff5c8d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+    margin-top: 10px;
+}
