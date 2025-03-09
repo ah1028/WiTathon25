@@ -54,14 +54,12 @@ def add_activity(title, descript, pic, expen, tod, time, long, lat,  min, max, t
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
-    x , y = loc #loc = tuple of location long/latitude
-
-    cursor.execute("INSERT INTO activities (title,description, picture, expense, time_of_day, duration, longitude, latitude, min_people, max_people) VALUES (?,?,?,?,?,?,?,?,?,?);"
+    cursor.execute("INSERT INTO activities (title, description, picture, expense, time_of_day, duration, longitude, latitude, min_people, max_people) VALUES (?,?,?,?,?,?,?,?,?,?);"
                    ,(title, descript, pic, expen, tod, time, long ,lat , min, max))
     conn.commit()
     conn.close()
     
-    if tags is not None: ## !! FIX THIS ##
+    if tags is not None: 
         activ_ID = cursor.lastrowid
 
         for tag in tags:
